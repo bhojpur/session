@@ -1,4 +1,4 @@
-package cmd
+package engine
 
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
@@ -21,40 +21,44 @@ package cmd
 // THE SOFTWARE.
 
 import (
-	"fmt"
-	"os"
-
-	log "github.com/sirupsen/logrus"
-	"github.com/spf13/cobra"
+	"encoding/json"
+	"net/http"
+	"net/http/httptest"
+	"strings"
+	"testing"
 )
 
-var verbose bool
-
-// rootCmd represents the base command when called without any subcommands
-var rootCmd = &cobra.Command{
-	Use:   "sessionsvr",
-	Short: "Bhojpur SessionEngine is a distributed session management server for enterprise applications",
-	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		if verbose {
-			log.SetLevel(log.DebugLevel)
-			log.Debug("verbose logging enabled")
-		}
-	},
-
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	//	Run: func(cmd *cobra.Command, args []string) { },
-}
-
-// Execute adds all child commands to the root command and sets flags appropriately.
-// This is called by main.main(). It only needs to happen once to the rootCmd.
-func Execute() {
-	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+func TestMem(t *testing.T) {
+	config := `{"cookieName":"bsessionid","gclifetime":10, "enableSetCookie":true}`
+	conf := new(ManagerConfig)
+	if err := json.Unmarshal([]byte(config), conf); err != nil {
+		t.Fatal("json decode error", err)
 	}
-}
-
-func init() {
-	rootCmd.PersistentFlags().BoolVar(&verbose, "verbose", false, "en/disable verbose logging")
+	globalSessions, _ := NewManager("memory", conf)
+	go globalSessions.GC()
+	r, _ := http.NewRequest("GET", "/", nil)
+	w := httptest.NewRecorder()
+	sess, err := globalSessions.SessionStart(w, r)
+	if err != nil {
+		t.Fatal("set error,", err)
+	}
+	defer sess.SessionRelease(nil, w)
+	err = sess.Set(nil, "username", "bhojpur")
+	if err != nil {
+		t.Fatal("set error,", err)
+	}
+	if username := sess.Get(nil, "username"); username != "bhojpur" {
+		t.Fatal("get username error")
+	}
+	if cookiestr := w.Header().Get("Set-Cookie"); cookiestr == "" {
+		t.Fatal("setcookie error")
+	} else {
+		parts := strings.Split(strings.TrimSpace(cookiestr), ";")
+		for k, v := range parts {
+			nameval := strings.Split(v, "=")
+			if k == 0 && nameval[0] != "bsessionid" {
+				t.Fatal("error")
+			}
+		}
+	}
 }

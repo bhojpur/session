@@ -3,9 +3,17 @@ module github.com/bhojpur/session
 go 1.17
 
 require (
+	github.com/bhojpur/token v0.0.1
+	github.com/bradfitz/gomemcache v0.0.0-20220106215444-fb4bf637b56d
+	github.com/couchbase/go-couchbase v0.1.1
+	github.com/go-redis/redis/v7 v7.4.1
+	github.com/go-sql-driver/mysql v1.6.0
+	github.com/ledisdb/ledisdb v0.0.0-20200510135210-d35789ec47e6
 	github.com/lib/pq v1.10.4
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.3.0
+	github.com/ssdb/gossdb v0.0.0-20180723034631-88f6b59b84ec
+	github.com/stretchr/testify v1.7.0
 	google.golang.org/grpc v1.43.0
 	google.golang.org/protobuf v1.27.1
 	k8s.io/apimachinery v0.23.1
@@ -14,11 +22,16 @@ require (
 
 require (
 	cloud.google.com/go/compute v1.0.0 // indirect
+	github.com/couchbase/gomemcached v0.1.4 // indirect
+	github.com/couchbase/goutils v0.1.2 // indirect
+	github.com/cupcake/rdb v0.0.0-20161107195141-43ba34106c76 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/docker/spdystream v0.1.0 // indirect
+	github.com/edsrzf/mmap-go v0.0.0-20170320065105-0bce6a688712 // indirect
 	github.com/go-logr/logr v1.2.2 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/golang/snappy v0.0.3 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/googleapis/gnostic v0.5.5 // indirect
 	github.com/imdario/mergo v0.3.12 // indirect
@@ -26,7 +39,13 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/pelletier/go-toml v1.9.4 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/siddontang/go v0.0.0-20170517070808-cb568a3e5cc0 // indirect
+	github.com/siddontang/rdb v0.0.0-20150307021120-fc89ed2e418d // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/syndtr/goleveldb v0.0.0-20160425020131-cfa635847112 // indirect
 	golang.org/x/crypto v0.0.0-20211215153901-e495a2d5b3d3 // indirect
 	golang.org/x/net v0.0.0-20220111093109-d55c255bac03 // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect

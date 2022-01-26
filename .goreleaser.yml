@@ -1,0 +1,61 @@
+before:
+  hooks:
+    - go generate -v ./...
+builds:
+- id: sessionsvr
+  env:
+  - CGO_ENABLED=0
+  main: server.go
+  binary: sessionsvr
+  ldflags:
+  - -s -w -X github.com/bhojpur/session/cmd/server.version={{.Version}}-{{.ShortCommit}}
+- id: sessionctl
+  env:
+  - CGO_ENABLED=0
+  main: client.go
+  binary: sessionctl
+  flags:
+    - -tags=sessionctl
+  ldflags:
+  - -s -w -X github.com/bhojpur/session/cmd/client.version={{.Version}}-{{.ShortCommit}}
+archives:
+- id: sessionsvr
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    386: i386
+    amd64: x86_64
+  builds:
+  - sessionsvr
+- id: sessionctl
+  files:
+  - "none*"
+  format: binary
+  builds:
+  - sessionctl
+  replacements:
+    darwin: Darwin
+    linux: Linux
+    386: i386
+    amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+release:
+  prerelease: auto
+dockers:
+  - goos: linux
+    goarch: amd64
+    goarm: ''
+    dockerfile: Dockerfile
+    image_templates:
+    - "ghcr.io/bhojpur/session:{{ .Tag }}"
+    extra_files:
+    - README.md
