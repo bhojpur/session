@@ -1,4 +1,4 @@
-package pkg
+package engine
 
 // Copyright (c) 2018 Bhojpur Consulting Private Limited, India. All rights reserved.
 
@@ -20,18 +20,19 @@ package pkg
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-var (
-	BuildVersion     string
-	BuildGitRevision string
-	BuildStatus      string
-	BuildTag         string
-	BuildTime        string
-
-	GoVersion string
-	GitBranch string
-)
+type ProviderType string
 
 const (
-	// VERSION represent Bhojpur Session - Application Framework version.
-	VERSION = "0.0.2"
+	ProviderCookie        ProviderType = `cookie`
+	ProviderFile          ProviderType = `file`
+	ProviderMemory        ProviderType = `memory`
+	ProviderCouchbase     ProviderType = `couchbase`
+	ProviderLedis         ProviderType = `ledis`
+	ProviderMemcache      ProviderType = `memcache`
+	ProviderMysql         ProviderType = `mysql`
+	ProviderPostgresql    ProviderType = `postgresql`
+	ProviderRedis         ProviderType = `redis`
+	ProviderRedisCluster  ProviderType = `redis_cluster`
+	ProviderRedisSentinel ProviderType = `redis_sentinel`
+	ProviderSsdb          ProviderType = `ssdb`
 )
