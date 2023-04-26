@@ -7,7 +7,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20220106215444-fb4bf637b56d
 	github.com/couchbase/go-couchbase v0.1.1
 	github.com/go-redis/redis/v7 v7.4.1
-	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-sql-driver/mysql v1.7.1
 	github.com/ledisdb/ledisdb v0.0.0-20200510135210-d35789ec47e6
 	github.com/lib/pq v1.10.4
 	github.com/sirupsen/logrus v1.8.1
