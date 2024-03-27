@@ -7,7 +7,7 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20220106215444-fb4bf637b56d
 	github.com/couchbase/go-couchbase v0.1.1
 	github.com/go-redis/redis/v7 v7.4.1
-	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-sql-driver/mysql v1.8.1
 	github.com/ledisdb/ledisdb v0.0.0-20200510135210-d35789ec47e6
 	github.com/lib/pq v1.10.4
 	github.com/sirupsen/logrus v1.8.1
@@ -22,6 +22,7 @@ require (
 
 require (
 	cloud.google.com/go/compute v1.0.0 // indirect
+	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/couchbase/gomemcached v0.1.4 // indirect
 	github.com/couchbase/goutils v0.1.2 // indirect
 	github.com/cupcake/rdb v0.0.0-20161107195141-43ba34106c76 // indirect
